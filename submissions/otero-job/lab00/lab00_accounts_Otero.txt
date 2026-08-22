@@ -1,0 +1,8 @@
+GitHub username
+- otero-job
+
+AI assistants you registered for
+job.otero@tup.edu.ph (CHATGPT AND Claude)
+
+repository URL 
+https://github.com/job-otero/numerical-methods-lab.git
