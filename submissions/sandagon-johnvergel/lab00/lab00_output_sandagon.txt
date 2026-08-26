@@ -1,0 +1,11 @@
+PS C:\Users\stewa\python-practice> python -u "c:\Users\stewa\Desktop\NUM\lab00_check_sandagon.py"
+Python     : 3.14.7
+NumPy      : 2.5.2
+SciPy      : 1.18.0
+Matplotlib : 3.11.1
+
+mean of sin(x) over one period : 0.0
+integral of sin(x) from 0 to pi : 2.0 (exact value 2)
+
+figure written to figures/lab00_check.png
+PLATFORM READY.
