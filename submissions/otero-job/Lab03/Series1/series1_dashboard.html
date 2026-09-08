@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Series1 Numerical Methods Laboratory Results</title>
+    <style>
+        /* ===== Global Styles ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f9;
+            color: #2c3e50;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* ===== Header ===== */
+        .header {
+            background: linear-gradient(135deg, #1a5276, #2980b9);
+            color: white;
+            padding: 40px 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .header h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* ===== Introduction ===== */
+        .intro {
+            background: white;
+            padding: 25px 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            border-left: 5px solid #2980b9;
+        }
+
+        .intro h2 {
+            color: #1a5276;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .intro ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .intro li {
+            margin-bottom: 8px;
+        }
+
+        /* ===== Exercise Cards ===== */
+        .exercise-card {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .exercise-header {
+            padding: 20px 30px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .exercise-header.ex1 {
+            background: linear-gradient(135deg, #1a5276, #2980b9);
+        }
+
+        .exercise-header.ex2 {
+            background: linear-gradient(135deg, #1e8449, #27ae60);
+        }
+
+        .exercise-header.ex3 {
+            background: linear-gradient(135deg, #6c3483, #8e44ad);
+        }
+
+        .exercise-header h2 {
+            font-size: 1.4em;
+            font-weight: 600;
+        }
+
+        .exercise-header .badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+
+        .exercise-body {
+            padding: 25px 30px;
+        }
+
+        .formula-box {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.2em;
+            font-family: 'Cambria Math', 'Times New Roman', serif;
+            color: #1a5276;
+        }
+
+        .formula-box .formula {
+            font-size: 1.3em;
+            font-weight: 600;
+        }
+
+        .explanation {
+            margin-bottom: 20px;
+        }
+
+        .explanation h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .explanation p {
+            margin-bottom: 10px;
+        }
+
+        .observations {
+            background: #f0f7ff;
+            border-left: 4px solid #2980b9;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 20px;
+        }
+
+        .observations h3 {
+            color: #1a5276;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .observations ul {
+            margin-left: 20px;
+        }
+
+        .observations li {
+            margin-bottom: 6px;
+        }
+
+        .image-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+            border: 1px solid #e9ecef;
+        }
+
+        .image-caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+
+        /* ===== Conclusions ===== */
+        .conclusions {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+            border-top: 5px solid #1a5276;
+        }
+
+        .conclusions h2 {
+            color: #1a5276;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        .conclusions ul {
+            margin-left: 20px;
+        }
+
+        .conclusions li {
+            margin-bottom: 12px;
+            font-size: 1.05em;
+        }
+
+        .conclusions li strong {
+            color: #1a5276;
+        }
+
+        /* ===== Footer ===== */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.6em;
+            }
+
+            .exercise-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+
+            .exercise-body {
+                padding: 20px;
+            }
+
+            .formula-box {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- ===== Header ===== -->
+        <div class="header">
+            <h1>Series1 Numerical Methods Laboratory Results</h1>
+            <p>An investigation of numerical convergence toward mathematical constants and functions using series approximations.</p>
+        </div>
+
+        <!-- ===== Introduction ===== -->
+        <div class="intro">
+            <h2>Introduction</h2>
+            <p>This laboratory exercise investigates three fundamental numerical methods:</p>
+            <ul>
+                <li><strong>Numerical convergence toward e</strong> — demonstrating that the sequence (1 + 1/n)<sup>n</sup> approaches the mathematical constant e as n increases.</li>
+                <li><strong>Numerical convergence toward ln(a)</strong> — showing that the difference quotient (a<sup>h</sup> − 1)/h approaches the natural logarithm ln(a) as h approaches zero.</li>
+                <li><strong>Approximation of exponential functions using power series</strong> — computing e<sup>x</sup> using the Taylor series expansion with increasing numbers of terms.</li>
+            </ul>
+        </div>
+
+        <!-- ===== Exercise 1 ===== -->
+        <div class="exercise-card">
+            <div class="exercise-header ex1">
+                <h2>Exercise 1: Convergence of (1 + 1/n)<sup>n</sup> toward e</h2>
+                <span class="badge">Exercise 1</span>
+            </div>
+            <div class="exercise-body">
+                <div class="formula-box">
+                    <span class="formula">lim<sub>n→∞</sub> (1 + 1/n)<sup>n</sup> = e ≈ 2.718281828459045</span>
+                </div>
+
+                <div class="explanation">
+                    <h3>Convergence Result</h3>
+                    <p>
+                        The sequence (1 + 1/n)<sup>n</sup> converges to the mathematical constant e as n increases.
+                        Starting from n = 1 (value = 2.0), the sequence approaches e as n is doubled repeatedly.
+                        At n = 1,048,576, the value is 2.718280532282396 with an absolute error of approximately
+                        1.30 × 10<sup>−6</sup>.
+                    </p>
+                </div>
+
+                <div class="observations">
+                    <h3>Key Numerical Observations</h3>
+                    <ul>
+                        <li>At n = 1: value = 2.000000000000, error = 7.18 × 10<sup>−1</sup></li>
+                        <li>At n = 16: value = 2.637928497367, error = 8.04 × 10<sup>−2</sup></li>
+                        <li>At n = 1,024: value = 2.716955729466, error = 1.33 × 10<sup>−3</sup></li>
+                        <li>At n = 1,048,576: value = 2.718280532282, error = 1.30 × 10<sup>−6</sup></li>
+                        <li>The error decreases approximately linearly on a log-log scale, demonstrating steady convergence.</li>
+                    </ul>
+                </div>
+
+                <div class="image-container">
+                    <img src="exercise1_results.png" alt="Exercise 1 Results - Convergence of (1+1/n)^n toward e">
+                    <div class="image-caption">Figure 1: Convergence of (1 + 1/n)<sup>n</sup> toward e (left) and the decreasing error (right).</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== Exercise 2 ===== -->
+        <div class="exercise-card">
+            <div class="exercise-header ex2">
+                <h2>Exercise 2: Convergence of (a<sup>h</sup> − 1)/h toward ln(a)</h2>
+                <span class="badge">Exercise 2</span>
+            </div>
+            <div class="exercise-body">
+                <div class="formula-box">
+                    <span class="formula">lim<sub>h→0</sub> (a<sup>h</sup> − 1)/h = ln(a)</span>
+                </div>
+
+                <div class="explanation">
+                    <h3>Convergence Result</h3>
+                    <p>
+                        The difference quotient (a<sup>h</sup> − 1)/h converges to the natural logarithm ln(a)
+                        as h approaches zero. This was verified for a = 2, a = e, and a = 3. With a convergence
+                        tolerance of 1 × 10<sup>−6</sup>, all three values of a reached the required accuracy
+                        at h = 1 × 10<sup>−6</sup>.
+                    </p>
+                </div>
+
+                <div class="observations">
+                    <h3>Key Numerical Observations</h3>
+                    <ul>
+                        <li><strong>a = 2:</strong> ln(2) = 0.693147180560; error at h = 10<sup>−6</sup> is 2.40 × 10<sup>−7</sup></li>
+                        <li><strong>a = e:</strong> ln(e) = 1.000000000000; error at h = 10<sup>−6</sup> is 5.00 × 10<sup>−7</sup></li>
+                        <li><strong>a = 3:</strong> ln(3) = 1.098612288668; error at h = 10<sup>−6</sup> is 6.04 × 10<sup>−7</sup></li>
+                        <li>All three values converge to their respective ln(a) targets within the 1 × 10<sup>−6</sup> tolerance at h = 10<sup>−6</sup>.</li>
+                        <li>The error decreases approximately linearly with h, confirming first-order convergence.</li>
+                    </ul>
+                </div>
+
+                <div class="image-container">
+                    <img src="exercise2_results.png" alt="Exercise 2 Results - Convergence of (a^h-1)/h toward ln(a)">
+                    <div class="image-caption">Figure 2: Grouped bar chart showing convergence of (a<sup>h</sup> − 1)/h toward ln(a) for a = 2, e, 3.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== Exercise 3 ===== -->
+        <div class="exercise-card">
+            <div class="exercise-header ex3">
+                <h2>Exercise 3: Approximation of e<sup>x</sup> Using the Power Series</h2>
+                <span class="badge">Exercise 3</span>
+            </div>
+            <div class="exercise-body">
+                <div class="formula-box">
+                    <span class="formula">e<sup>x</sup> = Σ<sub>n=0</sub><sup>∞</sup> x<sup>n</sup> / n!</span>
+                </div>
+
+                <div class="explanation">
+                    <h3>Convergence Result</h3>
+                    <p>
+                        The power series e<sup>x</sup> = Σ(x<sup>n</sup>/n!) converges rapidly to the true value
+                        of e<sup>x</sup>. Using x = 2.0, the partial sum S<sub>N</sub> approaches
+                        e<sup>2</sup> = 7.389056098930650. An error below 1 × 10<sup>−6</sup> is achieved
+                        with just N = 13 terms, and machine precision (~10<sup>−15</sup>) is reached by N = 20.
+                    </p>
+                </div>
+
+                <div class="observations">
+                    <h3>Key Numerical Observations</h3>
+                    <ul>
+                        <li>Error < 1 × 10<sup>−2</sup> achieved at N = 7 terms</li>
+                        <li>Error < 1 × 10<sup>−4</sup> achieved at N = 10 terms</li>
+                        <li>Error < 1 × 10<sup>−6</sup> achieved at N = 13 terms</li>
+                        <li>Error < 1 × 10<sup>−10</sup> achieved at N = 17 terms</li>
+                        <li>Final error at N = 10,000 is 1.78 × 10<sup>−15</sup> (machine precision)</li>
+                        <li>The stable recurrence relation term<sub>n+1</sub> = term<sub>n</sub> × x/(n+1) avoids factorial overflow.</li>
+                    </ul>
+                </div>
+
+                <div class="image-container">
+                    <img src="exercise3_results.png" alt="Exercise 3 Results - Power Series Approximation of e^x">
+                    <div class="image-caption">Figure 3: Partial sums of the e<sup>x</sup> power series (left) and the decreasing error (right).</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== Conclusions ===== -->
+        <div class="conclusions">
+            <h2>Conclusions</h2>
+            <ul>
+                <li><strong>Numerical approximations converge toward theoretical mathematical values.</strong>
+                    All three exercises demonstrated that carefully constructed numerical sequences and series
+                    converge to their corresponding mathematical constants and functions.</li>
+                <li><strong>Decreasing step sizes improve numerical approximations.</strong>
+                    In Exercise 2, reducing h from 0.1 to 10<sup>−6</sup> reduced the error from ~10<sup>−2</sup>
+                    to below 10<sup>−6</sup>, confirming that smaller step sizes yield more accurate results.</li>
+                <li><strong>Increasing the number of power-series terms improves accuracy.</strong>
+                    In Exercise 3, increasing N from 0 to 20 reduced the error from ~6.4 to below 10<sup>−14</sup>,
+                    demonstrating rapid convergence of the Taylor series.</li>
+                <li><strong>Floating-point precision and numerical stability matter.</strong>
+                    Using the recurrence relation term<sub>n+1</sub> = term<sub>n</sub> × x/(n+1) avoids
+                    computing huge factorials directly, which would cause overflow. This highlights the
+                    importance of numerically stable algorithms in scientific computing.</li>
+                <li><strong>Convergence tolerance provides a practical stopping criterion.</strong>
+                    The 1 × 10<sup>−6</sup> tolerance used in Exercise 2 allowed us to determine exactly when
+                    each approximation became sufficiently accurate.</li>
+            </ul>
+        </div>
+
+        <!-- ===== Footer ===== -->
+        <div class="footer">
+            <p>Series1 Numerical Methods Laboratory &copy; 2026</p>
+        </div>
+    </div>
+</body>
+</html>
