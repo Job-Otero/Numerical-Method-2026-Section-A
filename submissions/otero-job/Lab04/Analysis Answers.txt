@@ -1,0 +1,44 @@
+Analysis Answers
+
+1. How does error change as angle increases?
+For a fixed N, error grows sharply with angle — at N=1, error rises from 0.005% (1°) to 4.72% (30°), nearly a 1000× increase. This is because the Maclaurin series is a Taylor expansion around θ=0; the truncation error scales with θ^(2N+1), so larger angles push you further from the expansion point and each omitted term contributes more.
+
+2. How does error change as more terms are added?
+Error shrinks dramatically — roughly 2-4 orders of magnitude per added term (e.g., at 30°: 4.72% → 0.065% → 0.0004% → ~0% going from N=1 to N=4). This matches the θ^(2N+1)/(2N+1)! factor: each new term adds a higher power of θ divided by a fast-growing factorial, so the correction shrinks fast, especially once (2N+1)! outpaces θ^(2N+1).
+
+3. For small angles (< 5°), how many terms are sufficient?
+Just 1 term. At 1°, 2°, and 5°, the N=1 error is already ≤0.127%, which is negligible for most engineering purposes. This is the classic "small-angle approximation" sin(θ) ≈ θ — valid because higher-order terms are suppressed by θ³, θ⁵, etc., which are tiny when θ is small.
+
+4. For larger angles (> 20°), how many terms are needed?
+At least 3 terms to get well below 0.1% error (N=3 gives 0.0004% at 30°). N=2 is borderline (0.065% at 30°) — acceptable for rough engineering estimates but not high-precision work. N=1 is clearly inadequate (4.72% error at 30°).
+
+Taylor Series
+
+Which performs better near 10°? Taylor-at-10°, decisively — it's exact at 10° (zero error, since θ−a=0 there) and stays far more accurate than Maclaurin for every angle from 10° to 30° in this range.
+
+Which is better far from 10°? Maclaurin — at 1°, 2°, and 5° (all far from the Taylor center but close to 0), Maclaurin's error is 2–4 orders of magnitude smaller.
+
+Why: each series' accuracy is governed by distance from its own center — error scales with (θ − center)^(N+1). Maclaurin is centered at 0, so it's most accurate near 0° and degrades as θ grows. Taylor-at-10° is centered at 10°, so it's most accurate near 10° and degrades as you move away in either direction (note the errors grow both below and above 10° in the second table). The crossover in this data lands right around 10°, exactly where you'd expect.
+
+Analysis Answers
+
+1. Does adding more terms always improve the approximation?
+Yes, for a fixed center and a fixed θ — each added term is the next-order correction, so error monotonically shrinks (this is guaranteed for sin/cos since the series converges for all θ). What does not improve monotonically is comparing across different centers: Taylor@10° can need more terms than Maclaurin even though it's a "better" expansion point for angles near 10°, simply because Maclaurin's odd-only terms reach higher polynomial degree per term (as seen earlier).
+
+2. Why is Maclaurin most accurate near zero?
+It's a Taylor series centered at a=0, so the error term scales with θ^(N+1). The smaller θ is, the faster that power shrinks toward zero — accuracy degrades as you move away from the center, in either direction.
+
+3. Why can changing the Taylor expansion point improve accuracy?
+Because the error scales with (θ − a)^(N+1), not θ^(N+1). If you know in advance that you only care about angles near some value (say 10°), centering there makes (θ − a) small for your region of interest even though θ itself isn't small — trading global accuracy near 0 for local accuracy near a.
+
+4. How does distance from the expansion point affect accuracy?
+Error grows with |θ − a| raised to the power of (number of terms + 1) — so accuracy is best right at the center and degrades polynomially (then eventually the factorial in the denominator wins) as you move away. This is why Task 1 shows Taylor@10° needing more terms as you move from 10° toward 1° or 30°.
+
+5. What is the critical angle for sin(θ) ≈ θ?
+≈4.4°–4.5° for 0.1% tolerance. Below this, the one-term small-angle approximation is good enough; above it, the θ³/6 correction term becomes necessary.
+
+	Honestly, if I was the engineer on this project, I'd just use the exact sine function (math.sin()) and not bother with a series approximation at all. Because, modern computers can calculate sin() basically instantly, so there's no real reason to introduce error on purpose when you don't have to. Approximations like Maclaurin or Taylor series are cool for understanding how sine works and for teaching purposes, but for an actual civil engineering calculation where safety matters, why would I choose a method that's less accurate when the perfect one costs literally nothing extra?
+
+	But since this is the assignment and we're supposed to pick between the approximation methods, I'll defend the Maclaurin series with N=2 terms as my choice if I HAD to approximate. In the number of terms, 2 terms is all you need. That's a=0 to a=1 in the loop, so its really not much code or computation at all. While in percentage error, from my tables, n=2 Maclaurin gives errors of 0.065% at worse case (30°) and its way lower than that for smaller angles, like 0.0008% at 10°. That's well under the 0.1% tolerance we were told to hit, so this passes comfortably. Lastly, the convergence behavior drops really fast as you add terms — looking at my convergence plot, its almost a straight line down on the log scale, meaning each extra term is cutting the error by a lot (like orders of magnitude each time, not just a little bit). By n=4 the error is basically zero for every angle we tested.
+
+	This is really where Maclaurin wins over Taylor centered at 10°. Taylor needed 4 terms to get the same accuracy that Maclaurin got with only 2, across the whole 1°-30° range. So Taylor is actually MORE work for the same result unless your angle stays really close to 10° the whole time. And in real life, a structural angle is not going to stay fixed at exactly one value. There is tolerances, load changes, deflection, etc., so betting everything on one center point seems kind of risky honestly. Based on my data, n=2 Maclaurin is solid for 0°–30°, and probably works fine even past that.
